@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone</title>
+   <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e5ddd5;
+    }
+    
+    .container {
+        width: 800px;
+        height: 600px;
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar {
+        width: 30%;
+        border-right: 1px solid #ccc;
+        background-color: #f8f8f8;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar-header {
+        padding: 10px;
+        background-color: #075e54;
+        color: white;
+        text-align: center;
+    }
+    
+    .contact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex: 1;
+        overflow-y: auto;
+    }
+    
+    .contact {
+        padding: 15px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+    }
+    
+    .contact:hover {
+        background-color: #e0e0e0;
+    }
+    
+    .chat-area {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .chat-header {
+        padding: 10px;
+        background-color: #075e54;
+        color: white;
+        text-align: center;
+    }
+    
+    .message-area {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background-color: #e5ddd5;
+    }
+    
+    .typing-area {
+        display: flex;
+        border-top: 1px solid #ccc;
+        background-color: white;
+    }
+    
+    .typing-area input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
+    
+    .typing-area button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #128c7e;
+        color: white;
+        cursor: pointer;
+        outline: none;
+    }
+    
+    .typing-area button:hover {
+        background-color: #075e54;
+    }
+    
+    .message {
+        background-color: #dcf8c6;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 8px;
+        max-width: 70%;
+        word-wrap: break-word;
+    }
+    
+    .message.sent {
+        align-self: flex-end;
+        background-color: #34b7f1;
+        color: white;
+    }
+    
+   </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>WhatsApp</h2>
+            </div>
+            <ul class="contact-list"><br>
+                <input type="search" placeholder="search or chat"/>
+                <li class="contact">yoga</li>
+                <li class="contact">nani</li>
+                <li class="contact">kalix</li>
+            </ul>
+        </div>
+        <div class="chat-area">
+            <div class="chat-header">
+                <h2>Chat</h2>
+            </div>
+            <div class="message-area" id="message-area">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="typing-area">
+                <input type="text" id="message-input" placeholder="Type a message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script> 
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+document.getElementById('message-input').addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        sendMessage();
+    }
+});
+
+function sendMessage() {
+    const input = document.getElementById('message-input');
+    const message = input.value.trim();
+
+    if (message) {
+        const messageArea = document.getElementById('message-area');
+        const newMessage = document.createElement('div');
+        newMessage.textContent = message;
+        newMessage.className = 'message sent';
+        messageArea.appendChild(newMessage);
+        input.value = '';
+        messageArea.scrollTop = messageArea.scrollHeight;
+    }
+}
+
+    </script>
+</body>
+</html>
